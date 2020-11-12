@@ -13,7 +13,7 @@
 Summary:        Kernel
 Name:           linux
 Version:        5.9.0
-Release:        5%{?kat_build:.kat}%{?dist}
+Release:        6%{?kat_build:.kat}%{?dist}
 License:    	GPLv2
 URL:        	http://www.kernel.org/
 Group:        	System Environment/Kernel
@@ -252,7 +252,7 @@ Kernel driver for oprofile, a statistical profiler for Linux systems
 Summary:        This package contains the 'perf' performance analysis tools for Linux kernel
 Group:          System/Tools
 Requires:       (%{name} = %{version} or linux-esx = %{version} or linux-aws = %{version} or linux-rt = %{version})
-Requires:       audit elfutils-libelf binutils-libs xz-libs libunwind slang python3
+Requires:       audit elfutils-libelf binutils-libs xz-libs libunwind slang python3 traceevent-plugins
 %ifarch x86_64
 Requires:       pciutils
 %endif
@@ -654,10 +654,10 @@ getent group sgx_prv >/dev/null || groupadd -r sgx_prv
 %files tools
 %defattr(-,root,root)
 %ifarch x86_64
-/usr/lib64/traceevent
+%exclude /usr/lib64/traceevent
 %endif
 %ifarch aarch64
-/usr/lib/traceevent
+%exclude /usr/lib/traceevent
 %endif
 %{_bindir}
 %{_sysconfdir}/bash_completion.d/perf
@@ -684,6 +684,8 @@ getent group sgx_prv >/dev/null || groupadd -r sgx_prv
 %{python3_sitelib}/*
 
 %changelog
+*   Thu Nov 12 2020 Sharan Turlapati <sturlapati@vmware.com> 5.9.0-6
+-   Remove traceevent/plugins from linux-tools
 *   Tue Nov 10 2020 Keerthana K <keerthanak@vmware.com> 5.9.0-5
 -   Fix CVE-2020-8694
 *   Fri Nov 06 2020 Keerthana K <keerthanak@vmware.com> 5.9.0-4
