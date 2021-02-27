@@ -30,6 +30,7 @@ Requires:      libnetfilter_cthelper
 Requires:      libnetfilter_cttimeout
 Requires:      libnetfilter_queue
 Requires:      libnfnetlink
+Provides:      conntrack
 
 %description
 The conntrack-tools are a set of free software userspace tools for Linux that
